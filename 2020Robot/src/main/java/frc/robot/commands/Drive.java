@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class Drive extends CommandBase {
@@ -44,25 +45,25 @@ public class Drive extends CommandBase {
     if (sped == -1) {
       sped = 0;
     }
+    if (sped == 4) {
+      sped = 3;
+    }
     if (sped == 0) {
-      speed = joystick.getRawAxis(1) * 0.2;
-      turn = joystick.getRawAxis(2) * 0.1;
+      speed = joystick.getRawAxis(1) * Constants.SPEED1;
+      turn = joystick.getRawAxis(2) * Constants.TURN1;
     }
     if (sped == 1) {
-      speed = joystick.getRawAxis(1) * 0.4;
-      turn = joystick.getRawAxis(2) * 0.3;
+      speed = joystick.getRawAxis(1) * Constants.SPEED2;
+      turn = joystick.getRawAxis(2) * Constants.TURN2;
     }
     if (sped == 2) {
-      speed = joystick.getRawAxis(1) * 0.6;
-      turn = joystick.getRawAxis(2) * 0.4;
+      speed = joystick.getRawAxis(1) * Constants.SPEED3;
+      turn = joystick.getRawAxis(2) * Constants.TURN3;
     }
     if (sped == 3) {
-      speed = joystick.getRawAxis(1) * 0.8;
-      turn = joystick.getRawAxis(2) * 0.6;
+      speed = joystick.getRawAxis(1) * Constants.SPEED4;
+      turn = joystick.getRawAxis(2) * Constants.TURN4;
     }
-    if (sped >= 4) {
-      sped = 3;
-    };
 //You know, I'm somewhat of a Gamer myself.
     RobotContainer.chassis.drive(-speed + turn, speed + turn);
   }
