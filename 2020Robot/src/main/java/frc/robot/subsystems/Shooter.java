@@ -12,11 +12,12 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
-  private TalonFX Order66 = new TalonFX(5);
-  private TalonFX order66 = new TalonFX(6);
-  private TalonSRX Feeder = new TalonSRX(7);
+  private TalonFX Order66 = new TalonFX(Constants.SHOOTER_MOTOR_2);
+  private TalonFX order66 = new TalonFX(Constants.SHOOTER_MOTOR_1);
+  private TalonSRX Feeder = new TalonSRX(Constants.SHOOTER_FEEDER_ID);
   /**
    * Creates a new Shooter.
    */

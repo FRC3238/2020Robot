@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.lignUp;
-import frc.robot.commands.notShoot;
 import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.Shooter;
 
@@ -37,7 +36,6 @@ public class RobotContainer {
   public RobotContainer() {
     //set default commands
     chassis.setDefaultCommand(new Drive(joystickOne));
-    shooter.setDefaultCommand(new notShoot());
     // Configure the button bindings
     configureButtonBindings();
   }
