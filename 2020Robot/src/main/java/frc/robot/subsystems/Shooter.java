@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -22,13 +23,18 @@ public class Shooter extends SubsystemBase {
    * Creates a new Shooter.
    */
   public Shooter() {
+    Order66.configOpenloopRamp(0.2);
+    order66.configOpenloopRamp(0.2);
+    Feeder.configOpenloopRamp(0.5);
+    order66.follow(Order66);
+    order66.setInverted(TalonFXInvertType.Clockwise);
+    Order66.setInverted(TalonFXInvertType.CounterClockwise);
   }
 
   public void shoot(double Order66Power, double feederPower){
-    Feeder.set(ControlMode.PercentOutput, feederPower);
+    Feeder.set(ControlMode.PercentOutput, -feederPower);
     Order66.set(ControlMode.PercentOutput, Order66Power);
-    order66.set(ControlMode.PercentOutput, Order66Power);  
-      
+    
   }
   
 

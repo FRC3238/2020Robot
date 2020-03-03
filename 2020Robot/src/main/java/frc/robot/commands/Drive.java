@@ -65,7 +65,7 @@ public class Drive extends CommandBase {
       turn = joystick.getRawAxis(2) * Constants.TURN4;
     }
 //You know, I'm somewhat of a Gamer myself.
-    RobotContainer.chassis.drive(-speed + turn, speed + turn);
+    RobotContainer.chassis.drive(speed - turn, speed + turn);
   }
 
   // Called once the command ends or is interrupted.

@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -25,22 +26,25 @@ public class Chassis extends SubsystemBase {
   private CANSparkMax rightmotor2a = new CANSparkMax(2, MotorType.kBrushless);
   private CANSparkMax leftmotor1a = new CANSparkMax(3, MotorType.kBrushless);
   private CANSparkMax leftmotor2a = new CANSparkMax(4, MotorType.kBrushless);
+
   /**
    * Creates a new Chassis.
    */
   public Chassis() {
     rightmotor2.follow(rightmotor1);
     leftmotor2.follow(leftmotor1);
-    leftmotor1.getInverted();
-    leftmotor2.getInverted();
+    leftmotor1.setInverted(TalonFXInvertType.CounterClockwise);
+    leftmotor2.setInverted(TalonFXInvertType.CounterClockwise);
+    rightmotor1.setInverted(TalonFXInvertType.Clockwise);
+    rightmotor2.setInverted(TalonFXInvertType.Clockwise);
     rightmotor2a.follow(rightmotor1a);
     leftmotor2a.follow(leftmotor1a);
-    leftmotor1a.getInverted();
-    leftmotor2a.getInverted();
     rightmotor1a.setOpenLoopRampRate(0.2);
     rightmotor2a.setOpenLoopRampRate(0.2);
-    leftmotor1a.setOpenLoopRampRate(0.2);
-    leftmotor2a.setOpenLoopRampRate(0.2);
+    leftmotor1a.setOpenLoopRampRate(0.3);
+    leftmotor2a.setOpenLoopRampRate(0.3);
+    rightmotor1a.getInverted();
+    rightmotor2a.getInverted();
   }
 
   public void drive(double leftpower, double rightpower){

@@ -33,18 +33,18 @@ public class Shoot extends CommandBase {
     double y = ty.getEntry("ty").getDouble(0.0);
     double distance = 53 / Math.tan(Math.toRadians(31) + Math.toRadians(y));
     double shooterset = distance * 0.002;
-    RobotContainer.shooter.shoot(shooterset, 0.5);
+    RobotContainer.shooter.shoot(-0.8, 0.5);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+      RobotContainer.shooter.shoot(0, 0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    RobotContainer.shooter.shoot(0, 0);
-    return true;
+    return false;
   }
 }
