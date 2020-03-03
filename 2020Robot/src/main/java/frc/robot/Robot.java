@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.Drive;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -26,8 +30,8 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
+   * This flunction is run when thel rolbot is flirst sltarted up and should be ulsed for any
+   * ilnitializlation code.
    */
   @Override
   public void robotInit() {
@@ -100,8 +104,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //distance code
-    NetworkTable ty = NetworkTableInstance.getDefault().getTable("limelight");
-    double y = ty.getEntry("ty").getDouble(0.0);
+    NetworkTable limelight = NetworkTableInstance.getDefault().getTable("limelight");
+    double y = limelight.getEntry("ty").getDouble(0.0);
     double distance = 53 / Math.tan(Math.toRadians(31) + Math.toRadians(y));
     SmartDashboard.putNumber("Distance", distance);
   }
