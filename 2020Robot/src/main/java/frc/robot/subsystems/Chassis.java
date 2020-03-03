@@ -13,13 +13,14 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.commands.Drive;
 
 public class Chassis extends SubsystemBase {
-  private TalonFX rightmotor1 = new TalonFX(1);
-  private TalonFX rightmotor2 = new TalonFX(2);
-  private TalonFX leftmotor1 = new TalonFX(3);
-  private TalonFX leftmotor2 = new TalonFX(4);
+  private TalonFX rightmotor1 = new TalonFX(Constants.DRIVE_MOTOR_1_ID);
+  private TalonFX rightmotor2 = new TalonFX(Constants.DRIVE_MOTOR_2_ID);
+  private TalonFX leftmotor1 = new TalonFX(Constants.DRIVE_MOTOR_3_ID);
+  private TalonFX leftmotor2 = new TalonFX(Constants.DRIVE_MOTOR_4_ID);
   private CANSparkMax rightmotor1a = new CANSparkMax(1, MotorType.kBrushless);
   private CANSparkMax rightmotor2a = new CANSparkMax(2, MotorType.kBrushless);
   private CANSparkMax leftmotor1a = new CANSparkMax(3, MotorType.kBrushless);
