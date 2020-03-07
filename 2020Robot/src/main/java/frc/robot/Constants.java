@@ -32,4 +32,11 @@ public final class Constants {
 	public static final double TURN3 = 0.6;
 	public static final double SPEED4 = 0.8;
 	public static final double TURN4 = 0.6;
+	public static final int ElevatorId = 21;
+	public static final int ElevatorId1 = 22;
+	public static final int CollectorPivotID = 24;
+	public static final int CollectorIntakeID = 23;
+	public static final double RaisePower = 0.4; //Percent
+	public static final double LowerPower = 0.2; //Percent
+	public static final int TouchSensorID = 30; 
 }

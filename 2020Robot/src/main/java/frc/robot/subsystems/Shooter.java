@@ -25,7 +25,6 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
     rightshooter.configOpenloopRamp(0.2);
     leftshooter.configOpenloopRamp(0.2);
-    Feeder.configOpenloopRamp(0.5);
     leftshooter.follow(rightshooter);
     leftshooter.setInverted(TalonFXInvertType.Clockwise);
     rightshooter.setInverted(TalonFXInvertType.CounterClockwise);

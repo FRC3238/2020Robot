@@ -31,7 +31,7 @@ public class lignUp extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    table.getEntry("ledModes").setNumber(3);
+    table.getEntry("ledMode").setNumber(3);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -50,7 +50,7 @@ public class lignUp extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    table.getEntry("ledModes").setNumber(1);
+    table.getEntry("ledMode").setNumber(1);
   }
 
   // Returns true when the command should end.

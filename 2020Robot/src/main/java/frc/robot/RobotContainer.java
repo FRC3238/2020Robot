@@ -19,10 +19,15 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Collect123;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.collect4;
+import frc.robot.commands.collect5;
 import frc.robot.commands.lignUp;
 import frc.robot.subsystems.Chassis;
+import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shooter;
 
 /**
@@ -37,6 +42,8 @@ public class RobotContainer {
   public static Chassis chassis = new Chassis();
   public static Shooter shooter = new Shooter();
   private Joystick joystickOne = new Joystick(0);
+  public static Elevator elevator = new Elevator(); //Defines the Elevator Subsystem. 
+  public static Collector collector = new Collector();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -77,6 +84,22 @@ public class RobotContainer {
     two.whenHeld(new lignUp(joystickOne));
     JoystickButton trigger = new JoystickButton(joystickOne, 1);
     trigger.whenHeld(new Shoot());
+    JoystickButton eleven = new JoystickButton(joystickOne, 11);
+    JoystickButton twelve = new JoystickButton(joystickOne, 12);
+    eleven.whenPressed(new RunCommand(() -> collector.Raise()));
+    twelve.whenPressed(new RunCommand(() -> collector.Lower()));
+    if(collector.getBallCount() == 0 || collector.getBallCount() == 1 || collector.getBallCount() == 2 || collector.getBallCount() == 3){
+      new Collect123();
+    }
+    if (collector.getBallCount() == 4){
+      new collect4();
+    }
+    if(collector.getBallCount() == 5){
+      new collect5();
+    }
+    if (collector.getBallCount() == 5){
+      collector.Raise();
+    }
   }
 
   /**
@@ -84,4 +107,19 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+  public Command getAutonomousCommand() {
+    return new SequentialCommandGroup(
+                  new WaitCommand(3), 
+                  new ParallelDeadlineGroup(
+                          new WaitCommand(3),
+                          new lignUp(joystickOne)
+                  ),
+                  new ParallelDeadlineGroup(
+                          new WaitCommand(6),
+                          new Shoot()), 
+                  new ParallelDeadlineGroup(
+                          new WaitCommand(1), 
+                          new RunCommand(() -> chassis.drive(-0.2, -0.2)))
+                  );
+    }
 }
