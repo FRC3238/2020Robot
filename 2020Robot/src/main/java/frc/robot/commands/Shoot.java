@@ -36,7 +36,9 @@ public class Shoot extends CommandBase {
   public void execute() {
     double timerCount = timer.getFPGATimestamp();
     if (timerCount >= 1.5){
-      RobotContainer.elevator.driveElevator(0.3);
+      RobotContainer.elevator.driveElevator(0.5);
+    } else {
+      RobotContainer.elevator.driveElevator(0);
     }
     if (timerCount <= 0.5){
       NetworkTable ty = NetworkTableInstance.getDefault().getTable("limelight");

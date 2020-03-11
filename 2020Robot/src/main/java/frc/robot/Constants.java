@@ -36,7 +36,10 @@ public final class Constants {
 	public static final int ElevatorId1 = 22;
 	public static final int CollectorPivotID = 24;
 	public static final int CollectorIntakeID = 23;
-	public static final double RaisePower = 0.4; //Percent
+	public static final double RaisePower = 0.45; //Percent
 	public static final double LowerPower = 0.2; //Percent
-	public static final int TouchSensorID = 30; 
+	public static final int TouchSensorID = 0;
+	public static final int Climber1ID = 12;
+	public static final int Climber2ID = 13;
+	public static final double ClimberSpeed = 0.2;
 }

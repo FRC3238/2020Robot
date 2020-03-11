@@ -16,16 +16,20 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Collect123;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.collect;
 import frc.robot.commands.collect4;
 import frc.robot.commands.collect5;
 import frc.robot.commands.lignUp;
+import frc.robot.commands.stopSpin;
 import frc.robot.subsystems.Chassis;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shooter;
@@ -44,6 +48,7 @@ public class RobotContainer {
   private Joystick joystickOne = new Joystick(0);
   public static Elevator elevator = new Elevator(); //Defines the Elevator Subsystem. 
   public static Collector collector = new Collector();
+  //public static Climber climber = new Climber(); //Defines Climber
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -51,6 +56,8 @@ public class RobotContainer {
   public RobotContainer() {
     // set default commands
     chassis.setDefaultCommand(new Drive(joystickOne));
+    collector.setDefaultCommand(new stopSpin());
+    //climber.setDefaultCommand(new RunCommand(() -> climber.stopClimber()));
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -86,20 +93,14 @@ public class RobotContainer {
     trigger.whenHeld(new Shoot());
     JoystickButton eleven = new JoystickButton(joystickOne, 11);
     JoystickButton twelve = new JoystickButton(joystickOne, 12);
-    eleven.whenPressed(new RunCommand(() -> collector.Raise()));
-    twelve.whenPressed(new RunCommand(() -> collector.Lower()));
-    if(collector.getBallCount() == 0 || collector.getBallCount() == 1 || collector.getBallCount() == 2 || collector.getBallCount() == 3){
-      new Collect123();
-    }
-    if (collector.getBallCount() == 4){
-      new collect4();
-    }
-    if(collector.getBallCount() == 5){
-      new collect5();
-    }
-    if (collector.getBallCount() == 5){
-      collector.Raise();
-    }
+    twelve.whenHeld(new RunCommand(() -> collector.Raise()));
+    eleven.whenHeld(new collect());
+    eleven.whenHeld(new RunCommand(() -> collector.Lower()));
+    
+    JoystickButton ten = new JoystickButton(joystickOne, 10);
+    JoystickButton nine = new JoystickButton(joystickOne, 9);
+    //ten.whenHeld(new RunCommand(() -> climber.raiseClimber()));
+    //nine.whenHeld(new RunCommand(() -> climber.lowerClimber()));
   }
 
   /**
@@ -123,3 +124,8 @@ public class RobotContainer {
                   );
     }
 }
+         //////////
+            //     //     
+           //           //////////
+          //     //    //  //  //
+         //     //    //  //  //
