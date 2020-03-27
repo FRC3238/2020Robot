@@ -20,12 +20,9 @@ import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.Collect123;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.collect;
-import frc.robot.commands.collect4;
-import frc.robot.commands.collect5;
 import frc.robot.commands.lignUp;
 import frc.robot.commands.stopSpin;
 import frc.robot.subsystems.Chassis;
@@ -93,10 +90,11 @@ public class RobotContainer {
     trigger.whenHeld(new Shoot());
     JoystickButton eleven = new JoystickButton(joystickOne, 11);
     JoystickButton twelve = new JoystickButton(joystickOne, 12);
+    JoystickButton eight = new JoystickButton(joystickOne, 8);
+    eight.whenHeld(new RunCommand(() -> elevator.driveElevator(-0.2)));
     twelve.whenHeld(new RunCommand(() -> collector.Raise()));
     eleven.whenHeld(new collect());
-    eleven.whenHeld(new RunCommand(() -> collector.Lower()));
-    
+    eleven.toggleWhenActive(new RunCommand(() -> collector.Lower()));
     JoystickButton ten = new JoystickButton(joystickOne, 10);
     JoystickButton nine = new JoystickButton(joystickOne, 9);
     //ten.whenHeld(new RunCommand(() -> climber.raiseClimber()));
