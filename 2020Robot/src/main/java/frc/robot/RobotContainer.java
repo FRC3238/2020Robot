@@ -45,6 +45,7 @@ public class RobotContainer {
   private Joystick joystickOne = new Joystick(0);
   public static Elevator elevator = new Elevator(); //Defines the Elevator Subsystem. 
   public static Collector collector = new Collector();
+  public static Climber climber = new Climber();
   //public static Climber climber = new Climber(); //Defines Climber
 
   /**
@@ -53,7 +54,7 @@ public class RobotContainer {
   public RobotContainer() {
     // set default commands
     chassis.setDefaultCommand(new Drive(joystickOne));
-    collector.setDefaultCommand(new stopSpin());
+    collector.setDefaultCommand(new RunCommand(() -> collector.Raise(), collector));
     //climber.setDefaultCommand(new RunCommand(() -> climber.stopClimber()));
     // Configure the button bindings
     configureButtonBindings();
@@ -89,16 +90,14 @@ public class RobotContainer {
     JoystickButton trigger = new JoystickButton(joystickOne, 1);
     trigger.whenHeld(new Shoot());
     JoystickButton eleven = new JoystickButton(joystickOne, 11);
-    JoystickButton twelve = new JoystickButton(joystickOne, 12);
     JoystickButton eight = new JoystickButton(joystickOne, 8);
     eight.whenHeld(new RunCommand(() -> elevator.driveElevator(-0.2)));
-    twelve.whenHeld(new RunCommand(() -> collector.Raise()));
-    eleven.whenHeld(new collect());
-    eleven.toggleWhenActive(new RunCommand(() -> collector.Lower()));
+    eleven.toggleWhenActive(new collect());
+    eleven.whenHeld(new RunCommand(() -> collector.Lower()));
     JoystickButton ten = new JoystickButton(joystickOne, 10);
     JoystickButton nine = new JoystickButton(joystickOne, 9);
-    //ten.whenHeld(new RunCommand(() -> climber.raiseClimber()));
-    //nine.whenHeld(new RunCommand(() -> climber.lowerClimber()));
+    ten.whenHeld(new RunCommand(() -> climber.raiseClimber()));
+    nine.whenHeld(new RunCommand(() -> climber.lowerClimber()));
   }
 
   /**

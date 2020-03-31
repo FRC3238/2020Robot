@@ -21,6 +21,7 @@ public class Shoot extends CommandBase {
   public Shoot() {
     addRequirements(RobotContainer.shooter);
     addRequirements(RobotContainer.elevator);
+    addRequirements(RobotContainer.collector);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -36,24 +37,17 @@ public class Shoot extends CommandBase {
   public void execute() {
     double timerCount = timer.getFPGATimestamp();
     if (timerCount >= 1.5){
-      RobotContainer.elevator.driveElevator(0.5);
+      RobotContainer.elevator.driveElevator(0.45);
     } else {
       RobotContainer.elevator.driveElevator(0);
     }
-    if (timerCount <= 0.5){
       NetworkTable ty = NetworkTableInstance.getDefault().getTable("limelight");
     double y = ty.getEntry("ty").getDouble(0.0);
-    double distance = 53 / Math.tan(Math.toRadians(31) + Math.toRadians(y));
-    double shooterset = distance * 0.002;
-    RobotContainer.shooter.shoot(-0.8, -0.1);
-    } 
-    if (timerCount > 0.5){
-      NetworkTable ty = NetworkTableInstance.getDefault().getTable("limelight");
-    double y = ty.getEntry("ty").getDouble(0.0);
-    double distance = 53 / Math.tan(Math.toRadians(31) + Math.toRadians(y));
+    double distance = 57 / Math.tan(Math.toRadians(31) + Math.toRadians(y));
     double shooterset = distance * 0.002;
     RobotContainer.shooter.shoot(-0.8, 0.5);
-    } // Le Epic Gamer has died
+    RobotContainer.collector.spinIntake(0.2);
+   // Le Epic Gamer has died
   }
 
   // Called once the command ends or is interrupted.
@@ -62,6 +56,7 @@ public class Shoot extends CommandBase {
       RobotContainer.shooter.shoot(0, 0);
       RobotContainer.elevator.driveElevator(0);
       RobotContainer.collector.resetBallCount();
+      RobotContainer.collector.spinIntake(0);
   }
 
   // Returns true when the command should end.
